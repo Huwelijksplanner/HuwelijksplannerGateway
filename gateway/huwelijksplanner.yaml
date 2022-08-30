@@ -1,0 +1,9 @@
+#  Collections
+App\Entity\CollectionEntity:
+   vraagAntwoordRegisterCollection:
+       autoLoad: true
+       loadTestData: true
+       locationOAS: https://raw.githubusercontent.com/Huwelijksplanner/VraagAntwoordRegister/main/OAS.yaml
+       name: VraagAntwoordRegister
+       sourceType: GitHub
+      #  testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
