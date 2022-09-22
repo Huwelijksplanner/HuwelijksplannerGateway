@@ -1,44 +1,121 @@
 #  Collections
 App\Entity\CollectionEntity:
-   vraagAntwoordRegisterCollection:
-       autoLoad: true
-       loadTestData: true
-       locationOAS: https://raw.githubusercontent.com/Huwelijksplanner/VraagAntwoordRegister/main/OAS.yaml
-       name: VraagAntwoordRegister
-       sourceType: GitHub
-      #  testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
-   agendaserviceCollection:
-       autoLoad: true
-       loadTestData: true
-       locationOAS: https://raw.githubusercontent.com/Huwelijksplanner/AgendaService/main/OAS.yaml
-       name: AgendaService
-       sourceType: GitHub
-      #  testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
-   reviewRegisterCollection:
-       autoLoad: true
-       loadTestData: true
-       locationOAS: https://raw.githubusercontent.com/Huwelijksplanner/ReviewRegister/main/OAS.yaml
-       name: ReviewRegister
-       sourceType: GitHub
-      #  testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
-   trouwServicerCollection:
-       autoLoad: true
-       loadTestData: true
-       locationOAS: https://raw.githubusercontent.com/Huwelijksplanner/TrouwService/main/OAS.yaml
-       name: TrouwService
-       sourceType: GitHub
-      #  testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
-   berichtenServicerCollection:
-       autoLoad: true
-       loadTestData: true
-       locationOAS: https://raw.githubusercontent.com/Huwelijksplanner/BerichtenService/main/OAS.yaml
-       name: BerichtenService
-       sourceType: GitHub
-      #  testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
-   zaakRegistratieComponentCollection:
-       autoLoad: true
-       loadTestData: true
-       locationOAS: https://raw.githubusercontent.com/VNG-Realisatie/gemma-zaken/master/api-specificatie/zrc/1.2.x/openapi.yaml
-       name: zaakRegistratieComponent
-       sourceType: GitHub
-      #  testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
+    vraagAntwoordRegisterCollection:
+        autoLoad: true
+        loadTestData: true
+        locationOAS: https://raw.githubusercontent.com/Huwelijksplanner/VraagAntwoordRegister/main/OAS.yaml
+        name: VraagAntwoordRegister
+        sourceType: GitHub
+        #  testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
+    agendaserviceCollection:
+        autoLoad: true
+        loadTestData: true
+        locationOAS: https://raw.githubusercontent.com/Huwelijksplanner/AgendaService/main/OAS.yaml
+        name: AgendaService
+        sourceType: GitHub
+        #  testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
+    reviewRegisterCollection:
+        autoLoad: true
+        loadTestData: true
+        locationOAS: https://raw.githubusercontent.com/Huwelijksplanner/ReviewRegister/main/OAS.yaml
+        name: ReviewRegister
+        sourceType: GitHub
+        #  testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
+    trouwServicerCollection:
+        autoLoad: true
+        loadTestData: true
+        locationOAS: https://raw.githubusercontent.com/Huwelijksplanner/TrouwService/main/OAS.yaml
+        name: TrouwService
+        sourceType: GitHub
+        #  testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
+    berichtenServicerCollection:
+        autoLoad: true
+        loadTestData: true
+        locationOAS: https://raw.githubusercontent.com/Huwelijksplanner/BerichtenService/main/OAS.yaml
+        name: BerichtenService
+        sourceType: GitHub
+        #  testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
+    zaakRegistratieComponentCollection:
+        autoLoad: true
+        loadTestData: true
+        locationOAS: https://raw.githubusercontent.com/VNG-Realisatie/gemma-zaken/master/api-specificatie/zrc/1.2.x/openapi.yaml
+        name: zaakRegistratieComponent
+        sourceType: GitHub
+        #  testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
+
+App\Entity\Application:
+    application:
+        domains:
+            - acc-huwelijksplanner.commonground.nu
+        name: huwelijksplanner
+        organization: http://api/admin/organizations/a1c8e0b6-2f78-480d-a9fb-9792142f4761
+
+App\Entity\Endpoint:
+    availabilitycheck:
+        name: Calendar availability check
+        description: Endpoint for calendar availability check
+        path:
+            - 'calendar'
+            - 'availabilitycheck'
+        pathRegex: "^(calendar/availabilitycheck)$"
+        operationType: collection
+        method: 'GET'
+        
+App\Entity\Handler:
+    availabilitycheckHandler:
+        name: availabilitycheckHandler
+        methods: [ '*' ]
+        sequence: 0
+        conditions: "{}"
+        endpoints: [ '@availabilitycheck' ]
+        entity: '@availabilitycheckEntity'
+
+App\Entity\Entity:
+    availabilitycheckEntity:
+        name: availabilitycheckEntity
+        description: availabilitycheck Entity
+        route: "/calendar"
+        endpoint: "availabilitycheck"
+
+App\Entity\Attribute:
+    availabilitycheck_start:
+        name: start
+        description: The start date.
+        type: datetime
+        entity: "@availabilitycheckEntity"
+        searchable: true
+        
+    availabilitycheck_stop:
+        name: stop
+        description: The end date.
+        type: datetime
+        entity: "@availabilitycheckEntity"
+        searchable: true
+        
+    availabilitycheck_interval:
+        name: interval
+        description: The interval.
+        type: string
+        entity: "@availabilitycheckEntity"
+        searchable: true
+        
+    availabilitycheck_resources_could:
+        name: resources_could
+        description: The recources.
+        type: string
+        entity: "@availabilitycheckEntity"
+        searchable: true
+        multiple: true
+        
+App\Entity\Action:
+    CalendarAction:
+        name: CalendarAction
+        description: This action 
+        listens:
+            - 'commongateway.response.pre'
+        throws: [ ]
+        conditions:
+            '==': [ 1, 1 ]
+        class: App\ActionHandler\HuwelijksplannerHandler
+        priority: 0
+        async: false
