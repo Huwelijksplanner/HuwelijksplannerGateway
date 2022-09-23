@@ -41,8 +41,14 @@ App\Entity\CollectionEntity:
         locationOAS: https://raw.githubusercontent.com/VNG-Realisatie/gemma-zaken/master/api-specificatie/zrc/1.2.x/openapi.yaml
         name: zaakRegistratieComponent
         sourceType: GitHub
-        #  testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
-
+#        testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
+    overigeObjectenCollection:
+        autoLoad: true
+        loadTestData: true
+        locationOAS: https://raw.githubusercontent.com/Huwelijksplanner/OverigeObjecten/main/OAS.yaml
+        name: Overige objecten
+        sourceType: GitHub
+        testDataLocation: https://raw.githubusercontent.com/Huwelijksplanner/OverigeObjecten/main/data/data.json
 App\Entity\Application:
     application:
         domains:
@@ -114,8 +120,7 @@ App\Entity\Action:
         listens:
             - 'commongateway.response.pre'
         throws: [ ]
-        conditions:
-            '==': [ 1, 1 ]
+        conditions: {"var": "queryParameters.start"}
         class: App\ActionHandler\HuwelijksplannerHandler
         priority: 0
         async: false
