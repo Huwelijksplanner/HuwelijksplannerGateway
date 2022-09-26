@@ -41,7 +41,7 @@ App\Entity\CollectionEntity:
         locationOAS: https://raw.githubusercontent.com/VNG-Realisatie/gemma-zaken/master/api-specificatie/zrc/1.2.x/openapi.yaml
         name: zaakRegistratieComponent
         sourceType: GitHub
-#        testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
+    #        testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
     overigeObjectenCollection:
         autoLoad: true
         loadTestData: true
@@ -66,7 +66,7 @@ App\Entity\Endpoint:
         pathRegex: "^(calendar/availabilitycheck)$"
         operationType: collection
         method: 'GET'
-        
+
 App\Entity\Handler:
     availabilitycheckHandler:
         name: availabilitycheckHandler
@@ -78,8 +78,8 @@ App\Entity\Handler:
 
 App\Entity\Entity:
     availabilitycheckEntity:
-        name: availabilitycheckEntity
-        description: availabilitycheck Entity
+        name: calendar
+        description: The calender entity
         route: "/calendar"
         endpoint: "availabilitycheck"
 
@@ -90,21 +90,21 @@ App\Entity\Attribute:
         type: datetime
         entity: "@availabilitycheckEntity"
         searchable: true
-        
+    
     availabilitycheck_stop:
         name: stop
         description: The end date.
         type: datetime
         entity: "@availabilitycheckEntity"
         searchable: true
-        
+    
     availabilitycheck_interval:
         name: interval
         description: The interval.
         type: string
         entity: "@availabilitycheckEntity"
         searchable: true
-        
+    
     availabilitycheck_resources_could:
         name: resources_could
         description: The recources.
@@ -112,11 +112,11 @@ App\Entity\Attribute:
         entity: "@availabilitycheckEntity"
         searchable: true
         multiple: true
-        
+
 App\Entity\Action:
     CalendarAction:
         name: CalendarAction
-        description: This action 
+        description: This action
         listens:
             - 'commongateway.response.pre'
         throws: [ ]
