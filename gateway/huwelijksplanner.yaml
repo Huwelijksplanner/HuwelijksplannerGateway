@@ -21,14 +21,7 @@ App\Entity\CollectionEntity:
         name: ReviewRegister
         sourceType: GitHub
         #  testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
-    trouwServicerCollection:
-        autoLoad: true
-        loadTestData: true
-        locationOAS: https://raw.githubusercontent.com/Huwelijksplanner/TrouwService/main/OAS.yaml
-        name: TrouwService
-        sourceType: GitHub
-        #  testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
-    berichtenServicerCollection:
+    berichtenServiceCollection:
         autoLoad: true
         loadTestData: true
         locationOAS: https://raw.githubusercontent.com/Huwelijksplanner/BerichtenService/main/OAS.yaml
@@ -38,17 +31,38 @@ App\Entity\CollectionEntity:
     zaakRegistratieComponentCollection:
         autoLoad: true
         loadTestData: true
-        locationOAS: https://raw.githubusercontent.com/VNG-Realisatie/gemma-zaken/master/api-specificatie/zrc/1.2.x/openapi.yaml
-        name: zaakRegistratieComponent
+        locationOAS: https://raw.githubusercontent.com/CommonGateway/ZaakRegistratieComponentAPI/main/OAS.yaml
+        name: ZaakRegistratieComponent
         sourceType: GitHub
-    #        testDataLocation: https://raw.githubusercontent.com/ConductionNL/brc_publiccode/main/data/brc.json
+        testDataLocation: https://raw.githubusercontent.com/CommonGateway/ZaakRegistratieComponentAPI/main/data/zrc.json
+    zaakTypeCatalogusCollection:
+        autoLoad: true
+        loadTestData: true
+        locationOAS: https://raw.githubusercontent.com/CommonGateway/ZaakTypeCatalogusAPI/main/OAS.yaml
+        name: ZaakTypeCatalogus
+        sourceType: GitHub
+        testDataLocation: https://raw.githubusercontent.com/CommonGateway/ZaakTypeCatalogusAPI/main/data/ztc.json
     overigeObjectenCollection:
         autoLoad: true
         loadTestData: true
         locationOAS: https://raw.githubusercontent.com/Huwelijksplanner/OverigeObjecten/main/OAS.yaml
         name: Overige objecten
         sourceType: GitHub
-        testDataLocation: https://raw.githubusercontent.com/Huwelijksplanner/OverigeObjecten/main/data/data.json
+        testDataLocation: https://raw.githubusercontent.com/Huwelijksplanner/OverigeObjecten/main/data/huwelijksplanner.json
+    klantenCollection:
+        autoLoad: true
+        loadTestData: true
+        locationOAS: https://raw.githubusercontent.com/CommonGateway/KlantenAPI/main/OAS.yaml
+        name: Klanten collection
+        sourceType: GitHub
+        testDataLocation: https://raw.githubusercontent.com/CommonGateway/KlantenAPI/main/data/klanten.json
+    trouwServiceCollection:
+        autoLoad: true
+        loadTestData: true
+        locationOAS: https://raw.githubusercontent.com/Huwelijksplanner/TrouwService/main/OAS.yaml
+        name: TrouwService
+        sourceType: GitHub
+        testDataLocation: https://raw.githubusercontent.com/Huwelijksplanner/TrouwService/main/data/data.json
 App\Entity\Application:
     application:
         domains:
